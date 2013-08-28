@@ -1,9 +1,16 @@
 <?php
 
+/**
+ * 
+ * v0.2 - 2013-08-28 - set invite via the "sendformat" instead of adding it's own tab
+ * v0.1 - initial 
+ * 
+ */
+
 class inviteplugin extends phplistPlugin {
   public $name = "Invite plugin for phpList";
   public $coderoot = '';
-  public $version = "0.1";
+  public $version = "0.2";
   public $authors = 'Michiel Dethmers';
   public $enabled = 1;
   public $description = 'Send an invite to subscribe to the phpList mailing system';
@@ -17,7 +24,11 @@ class inviteplugin extends phplistPlugin {
     );
   }
   
-  function sendMessageTab($messageid = 0, $data = array ()) {
+  function sendFormats() {
+    return array ('invite' => s('Invite'));
+  }
+  
+  function XsendMessageTab($messageid = 0, $data = array ()) {
     if (!$this->enabled)
       return null;
       
@@ -40,7 +51,7 @@ class inviteplugin extends phplistPlugin {
     return true;
   }
   
-  function sendMessageTabTitle($messageid = 0) {
+  function XsendMessageTabTitle($messageid = 0) {
     if (!$this->enabled)
       return null;
 
@@ -48,9 +59,8 @@ class inviteplugin extends phplistPlugin {
   }
   
   function allowMessageToBeQueued($messagedata = array()) {
-    
     ## we only need to check if this is sent as an invite
-    if (!empty($messagedata['sendInvite'])) {
+    if ($messagedata['sendformat'] == 'invite') {
       $cnt = '';
       $hasConfirmationLink = false;
       foreach ($messagedata as $key => $val) {
