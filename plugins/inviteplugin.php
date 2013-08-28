@@ -14,6 +14,17 @@ class inviteplugin extends phplistPlugin {
   public $authors = 'Michiel Dethmers';
   public $enabled = 1;
   public $description = 'Send an invite to subscribe to the phpList mailing system';
+  public $settings = array(
+    "inviteplugin_subscribepage" => array (
+      'value' => 0,
+      'description' => 'Subscribe page for invitation responses',
+      'type' => "integer",
+      'allowempty' => 0,
+      'min'=> 0,
+      'max'=> 999999,
+      'category'=> 'transactional',
+    ),
+  );
   
   function __construct() {
     parent::phplistplugin();
@@ -86,6 +97,11 @@ class inviteplugin extends phplistPlugin {
       if (!isBlackListed($userdata['email'])) {
         addUserToBlackList($userdata['email'],s('Blacklisted by the invitation plugin'));
       }
+    }
+    ## if subscribe page is set, mark this subscriber for that page
+    $sPage = getConfig('inviteplugin_subscribepage');
+    if (!empty($sPage)) {
+      Sql_Query(sprintf('update %s set subscribepage = %d where id = %d',$GLOBALS['tables']['user'],$sPage,$userdata['id']));
     }
   }
   

@@ -3,21 +3,42 @@ phplist-plugin-invite
 
 Invite people to join your phpList system.
 
-v0.1 2013-08-28
+v0.2 2013-08-28
 
 requires phpList version 3.0.3 or newer
 
-This plugin will use the campaign system to send a one-off invite to your subscribers.
+This plugin will use the campaign system to send a one-off invite to your subscribers. After that, phpList will ensure 
+further campaigns will only go out to subscribers who responded to the invite.
 
 It does this as follows:
 
-1. in the Send campaign page, there will be an INVITE tab, where you can mark the campaign to be an invitation
+1. in the Send-campaign page, on the Format tab, there will be an option (radio button) called "Invite". 
+
+Choose this option to send the campaign as an Invite.
+
 2. When you do so, you need to add [CONFIRMATIONURL] to the content.
+
 The confirmation URL will be the place where the recipients can confirm that they want to be in your system.
 
 3. After sending the campaign, the subscriber will be marked "Blacklisted" in the phpList system, which means
-no further mails will be sent.
+no further mails will be sent. HOWEVER:
 
-4. When they click the above Confirmation URL, they will be removed from the blacklist
+4. The recipients who clicked the Confirmation URL will be removed from the blacklist and turn into normal subscribers.
+
+
+ADVANCED OPTIONS:
+
+When the subcriber confirms, they will receive the standard "Welcome to our newsletter" message.
+
+To send them a different message, do the following:
+
+1. Create a subscribe page with the message and details you want to send
+2. Set the "Settings" value for "Subscribe page for invitation responses" which will be added by this plugin
+
+What will happen is the following:
+
+- when the message is sent to this subscriber, their profile is updated to have the subscribe page set with the value from the config setting
+- when they confirm their subscription, the welcome message from this subscribe page will be sent.
+
 
 
