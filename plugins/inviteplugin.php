@@ -10,7 +10,7 @@
 class inviteplugin extends phplistPlugin {
   public $name = "Invite plugin for phpList";
   public $coderoot = '';
-  public $version = "0.2";
+  public $version = "0.3";
   public $authors = 'Michiel Dethmers';
   public $enabled = 1;
   public $description = 'Send an invite to subscribe to the phpList mailing system';
