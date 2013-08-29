@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ * v0.3 - 2013-08-29 - add config for target list, where subscribers who confirm are added to
  * v0.2 - 2013-08-28 - set invite via the "sendformat" instead of adding it's own tab
  * v0.1 - initial 
  * 
@@ -23,6 +23,15 @@ class inviteplugin extends phplistPlugin {
       'min'=> 0,
       'max'=> 999999,
       'category'=> 'transactional',
+    ),
+    "inviteplugin_targetlist" => array (
+      'value' => 0,
+      'description' => 'Add subscribers confirming an invitation to this list',
+      'type' => "integer",
+      'allowempty' => 0,
+      'min'=> 0,
+      'max'=> 999999,
+      'category'=> 'segmentation',
     ),
   );
   
@@ -93,7 +102,7 @@ class inviteplugin extends phplistPlugin {
 
   function processSendSuccess($messageid, $userdata, $isTestMail = false) {
     $messagedata = loadMessageData($messageid);
-    if (!$isTestMail && !empty($messagedata['sendInvite'])) {  
+    if (!$isTestMail && $messagedata['sendformat'] == 'invite') {  
       if (!isBlackListed($userdata['email'])) {
         addUserToBlackList($userdata['email'],s('Blacklisted by the invitation plugin'));
       }
@@ -102,6 +111,17 @@ class inviteplugin extends phplistPlugin {
     $sPage = getConfig('inviteplugin_subscribepage');
     if (!empty($sPage)) {
       Sql_Query(sprintf('update %s set subscribepage = %d where id = %d',$GLOBALS['tables']['user'],$sPage,$userdata['id']));
+    }
+  }
+  
+  
+  function subscriberConfirmation($subscribepageID,$userdata = array()) {
+    $sPage = getConfig('inviteplugin_subscribepage');
+    $newList = getConfig('inviteplugin_targetlist');
+    if (!empty($sPage) && !empty($newList) && $sPage == $subscribepageID) {
+      if ($userdata['blacklisted']) { ## the subscriber has not been unblacklisted yet at this stage
+        Sql_Query(sprintf('insert ignore into %s (userid,listid) values(%d,%d)',$GLOBALS['tables']['listuser'],$userdata['id'],$newList));
+      }
     }
   }
   

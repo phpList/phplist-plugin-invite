@@ -41,4 +41,10 @@ What will happen is the following:
 - when they confirm their subscription, the welcome message from this subscribe page will be sent.
 
 
+With the subscribe page option, you can set "Add subscribers confirming an invitation to this list" in settings
+to automatically add subscribers who confirm to this list.
+
+This requires using the "Subscribe page for invitation responses" setting, and the confirmation being made on that
+subscribe page.
+
 
