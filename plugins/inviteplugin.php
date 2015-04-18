@@ -14,6 +14,7 @@ class inviteplugin extends phplistPlugin {
   public $authors = 'Michiel Dethmers';
   public $enabled = 1;
   public $description = 'Send an invite to subscribe to the phpList mailing system';
+  public $documentationUrl = 'https://resources.phplist.com/plugin/invite';
   public $settings = array(
     "inviteplugin_subscribepage" => array (
       'value' => 0,
