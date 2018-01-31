@@ -23,7 +23,7 @@ class inviteplugin extends phplistPlugin {
       'allowempty' => 0,
       'min'=> 0,
       'max'=> 999999,
-      'category'=> 'transactional',
+      'category'=> 'Invite plugin',
     ),
     "inviteplugin_targetlist" => array (
       'value' => 0,
@@ -32,7 +32,7 @@ class inviteplugin extends phplistPlugin {
       'allowempty' => 0,
       'min'=> 0,
       'max'=> 999999,
-      'category'=> 'segmentation',
+      'category'=> 'Invite plugin',
     ),
   );
   
