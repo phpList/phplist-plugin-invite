@@ -107,6 +107,13 @@ class inviteplugin extends phplistPlugin {
       if (!isBlackListed($userdata['email'])) {
         addUserToBlackList($userdata['email'],s('Blacklisted by the invitation plugin'));
       }
+        Sql_Query(sprintf(
+            'update %s
+            set confirmed = 0
+            where id = %d',
+            $GLOBALS['tables']['user'],
+            $userdata['id']
+        ));
     }
     ## if subscribe page is set, mark this subscriber for that page
     $sPage = getConfig('inviteplugin_subscribepage');
