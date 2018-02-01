@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * v0.4 - 2018-02-01 - bug fixes.
  * v0.3 - 2013-08-29 - add config for target list, where subscribers who confirm are added to.
  * v0.2 - 2013-08-28 - set invite via the "sendformat" instead of adding it's own tab.
  * v0.1 - initial.
@@ -9,7 +10,7 @@ class inviteplugin extends phplistPlugin
 {
     public $name = 'Invite plugin for phpList';
     public $coderoot = '';
-    public $version = '0.3';
+    public $version = '0.4';
     public $authors = 'Michiel Dethmers';
     public $enabled = 1;
     public $description = 'Send an invite to subscribe to the phpList mailing system';
