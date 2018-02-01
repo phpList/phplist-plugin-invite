@@ -77,16 +77,16 @@ class inviteplugin extends phplistPlugin
                 $GLOBALS['tables']['user'],
                 $userdata['id']
             ));
-        }
-        // if subscribe page is set, mark this subscriber for that page
-        $sPage = getConfig('inviteplugin_subscribepage');
-        if (!empty($sPage)) {
-            Sql_Query(sprintf(
-                'update %s set subscribepage = %d where id = %d',
-                $GLOBALS['tables']['user'],
-                $sPage,
-                $userdata['id']
-            ));
+            // if subscribe page is set, mark this subscriber for that page
+            $sPage = getConfig('inviteplugin_subscribepage');
+            if (!empty($sPage)) {
+                Sql_Query(sprintf(
+                    'update %s set subscribepage = %d where id = %d',
+                    $GLOBALS['tables']['user'],
+                    $sPage,
+                    $userdata['id']
+                ));
+            }
         }
     }
 
