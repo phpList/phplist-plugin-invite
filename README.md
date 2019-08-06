@@ -1,17 +1,15 @@
-# phplist-plugin-invite
+# phplist-plugin-repermission
 
-Invite people to join your phpList system.
-
-v0.2 2013-08-28
+Send repermission campaigns which require subscribers to re-confirm their list membership.
 
 requires phpList version 3.0.3 or newer
 
-This plugin will use the campaign system to send a one-off invite to your subscribers. After that, phpList will ensure 
-further campaigns will only go out to subscribers who responded to the invite.
+This plugin will use the campaign system to send a one-off repermission campaign to your subscribers. After that, phpList will ensure 
+further campaigns will only go out to subscribers who responded to the request.
 
 It does this as follows:
 
-  - in the Send-campaign page, on the Format tab, there will be an option (radio button) called "Invite". Choose this option to send the campaign as an Invite.
+  - in the Send-campaign page, on the Format tab, there will be an option (radio button) called "Repermission". Choose this option to send the campaign as a repermission campaign.
   - When you do so, you need to add [CONFIRMATIONURL] to the content. The confirmation URL will be the place where the recipients can confirm that they want to be in your system.
   - After sending the campaign, the subscriber will be marked "Blacklisted" in the phpList system, which means no further mails will be sent. HOWEVER:
   - The recipients who clicked the Confirmation URL will be removed from the blacklist and turn into normal subscribers.
